@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="1"
+    android:background="@drawable/jy"
+    android:orientation="horizontal"
+
+    >
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" -->
+
+    <TextView
+        android:text="VON"
+        android:layout_width="199dp"
+        android:layout_height="55dp"
+        android:id="@+id/textView4"
+        android:textColor="@color/blue_dark"
+        android:textSize="46sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
+        tools:textStyle="bold"
+        tools:shadowRadius="12" />
+
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/user"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:text="Male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/r_genderM"
+            tools:textStyle="bold"
+            tools:shadowRadius="12"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+    </RadioGroup>
+
+    <RadioButton
+        android:text="Female"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/r_genderF"
+        tools:textStyle="bold"
+        tools:shadowRadius="12"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_alignBaseline="@+id/user"
+        android:layout_alignBottom="@+id/user"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:textStyle="bold"
+        tools:shadowRadius="12"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:id="@+id/user"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/textView6" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter your age"
+        android:id="@+id/editText8"
+        android:ems="10"
+        android:background="@android:color/background_light"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter your email"
+        android:ems="10"
+
+        android:background="@android:color/background_light"
+        android:id="@+id/editText"
+        android:layout_alignTop="@+id/textView6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/editText7"
+        android:layout_alignStart="@+id/editText7"
+        android:layout_alignBottom="@+id/textView6" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="Password"
+        android:background="@android:color/background_light"
+        android:id="@+id/editText7"
+        android:layout_alignTop="@+id/l_pass"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/l_pass"
+        android:layout_alignLeft="@+id/l_name"
+        android:layout_alignStart="@+id/l_name"
+        android:layout_marginLeft="20dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter your Username"
+        android:ems="10"
+        android:background="@android:color/background_light"
+        android:id="@+id/l_name"
+        android:layout_above="@+id/l_pass"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView5" />
+
+    <TextView
+        android:text="Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/textView5"
+        tools:textStyle="bold"
+        tools:shadowRadius="12"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        tools:textStyle="bold"
+        tools:shadowRadius="12"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/l_pass"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp" />
+
+    <TextView
+        android:text="Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/l_pass"
+        tools:textStyle="bold"
+        tools:shadowRadius="12"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:textStyle="bold"
+        tools:shadowRadius="12"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:id="@+id/textView2"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Sign up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_upbtn"
+        tools:textStyle="bold"
+        tools:shadowRadius="12"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:background="#ffffcecb"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:text="Profile Picture"
+        tools:textStyle="bold"
+        tools:shadowRadius="12"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/jy"
+
+        android:id="@+id/profilePic"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignLeft="@+id/editText8"
+        android:layout_alignStart="@+id/editText8" />
+
+</RelativeLayout>

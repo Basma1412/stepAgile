@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:showIn="@layout/activity_log_in"
+    android:background="@drawable/jy"
+    android:id="@+id/game_window">
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" -->
+
+
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="VON"
+        android:id="@+id/textView4"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="90dp"
+        android:text="Math Game 1"
+        android:id="@+id/mathbutton1"
+        android:layout_marginTop="83dp"
+        android:textSize="25dp"
+        android:textStyle="bold|italic"
+        android:textColorHighlight="#ff38bbff"
+        android:clickable="true"
+        android:background="#ffffb6fb"
+        android:layout_below="@+id/textView4"
+        android:layout_toLeftOf="@+id/textView4"
+        android:layout_toStartOf="@+id/textView4"
+        android:textColor="#ff000000" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="90dp"
+        android:text="Math Game 2"
+        android:id="@+id/leaderbtn"
+        android:background="#ff99ff79"
+        android:clickable="true"
+        android:textStyle="bold|italic"
+        android:textSize="25dp"
+        android:layout_alignTop="@+id/mathbutton1"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4"
+        android:textColor="#ff000000" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="90dp"
+        android:text="Math Game 3"
+        android:id="@+id/gamebtn3"
+        android:layout_below="@+id/mathbutton1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:background="#ffbbd7ff"
+        android:textStyle="bold|italic"
+        android:textSize="25dp"
+        />
+
+
+</RelativeLayout>

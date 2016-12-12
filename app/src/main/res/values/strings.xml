@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">VON Games</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="sign_in">Login</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="changepass">Change password</string>
+    <string name="logout">Log out</string>
+    <string name="appbar_scrolling_view_behavior"></string>
+</resources>
