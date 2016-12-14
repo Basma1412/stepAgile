@@ -27,30 +27,6 @@
         android:layout_toEndOf="@+id/ratingBar1"
         android:layout_toRightOf="@+id/ratingBar1" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Leader Board"
-        android:alpha="0.55"
-        android:backgroundTint="@color/colorPrimary"
-        android:id="@+id/leaderbtn"
-        android:background="#ffffbbc9"
-        android:textColor="#ff000000"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Email"
-        android:id="@+id/emailInfo"
-        android:textColor="#ff000000"
-        android:layout_below="@+id/profileImg"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
 
     <RatingBar
         android:id="@+id/ratingBar1"
@@ -62,18 +38,6 @@
         android:layout_marginTop="75dp"
         android:layout_below="@+id/leaderbtn"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Age"
-        android:id="@+id/ageInfo"
-        android:layout_below="@+id/emailInfo"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:textColor="#ff000000"
-        android:layout_marginLeft="5dp" />
 
     <TextView
         android:layout_width="250dp"
@@ -95,6 +59,53 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Leader Board"
+        android:alpha="0.55"
+        android:backgroundTint="@color/colorPrimary"
+        android:id="@+id/leaderbtn"
+        android:background="#ffffbbc9"
+        android:textColor="#ff000000"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/ageInfo"
+        android:layout_toLeftOf="@+id/welcomeuser"
+        android:layout_toStartOf="@+id/welcomeuser" />
+
+    <Button
+        android:text="Update Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/UpdateImgBtn"
+        android:layout_below="@+id/profileImg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Email"
+        android:id="@+id/emailInfo"
+        android:textColor="#ff000000"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/ratingBar1"
+        android:layout_toStartOf="@+id/ratingBar1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age"
+        android:id="@+id/ageInfo"
+        android:textColor="#ff000000"
+        android:layout_below="@+id/emailInfo"
+        android:layout_alignLeft="@+id/emailInfo"
+        android:layout_alignStart="@+id/emailInfo" />
 
 
 </RelativeLayout>

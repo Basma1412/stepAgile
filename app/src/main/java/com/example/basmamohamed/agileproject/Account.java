@@ -1,9 +1,16 @@
 package com.example.basmamohamed.agileproject;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,11 +19,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+import static android.provider.Settings.System.AIRPLANE_MODE_ON;
 
 import java.io.File;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
+import static android.app.PendingIntent.getActivity;
 import static com.example.basmamohamed.agileproject.R.layout.account;
 
 /**
@@ -37,38 +47,81 @@ public class Account  extends ActionBarActivity {
     private RatingBar ratingbar1;
     int totalscore;
     ImageView profile_img;
-
+    Button UpdateImg;
     MyBD bd;
-    @Override
+
+
+
+
+    static boolean isAirplaneModeOn(Context context) {
+        ContentResolver contentResolver = context.getContentResolver();
+        return Settings.System.getInt(contentResolver, AIRPLANE_MODE_ON, 0) != 0;
+    }
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(account);
         profile_img=(ImageView)findViewById(R.id.profileImg);
         txt=(TextView) findViewById(R.id.welcomeuser);
+        UpdateImg = (Button)  findViewById(R.id.UpdateImgBtn);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-
-        String s = bundle.getString("User");
-
-        txt.setText("Welcome "+s);
+        final String userName = bundle.getString("User");
+        txt.setText("Welcome "+userName);
 
         bd=new MyBD(this);
-
-
-        String urI=bd.getURI(bd,s);
-
-
+        String urI=bd.getURI(bd,userName);
         Uri uri;
         uri = Uri.parse(urI);
-
         File f = new File(uri.getPath());
 
-        //Picasso.with(this).load(f).noPlaceholder().centerCrop().fit().into(profile_img);
-        Picasso.with(this)
-                .load(uri)
-                .fit()
-                .skipMemoryCache()
-                .into(profile_img);
+        Picasso picasso = new Picasso.Builder(this).listener(new Picasso.Listener() {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                exception.printStackTrace();
+            }
+        }).build();
+
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        } else {
+            picasso.with(this).setLoggingEnabled(true);
+            picasso.with(this)
+                    .load(uri)
+                    .fit()
+                    .skipMemoryCache()
+                    .centerInside()
+                    .into(profile_img);
+
+        }
+
+
+
+
+        profile_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent,RESULT_LOAD_IMG);
+            }
+        });
+
+
+        UpdateImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                bd.editImage(bd,userName,newImage);
+                Toast.makeText(Account.this, "Image was Updated",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         btn1=(Button) findViewById(R.id.button);
@@ -83,8 +136,6 @@ public class Account  extends ActionBarActivity {
 
 
         btn3=(Button) findViewById(R.id.leaderbtn);
-
-
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +147,8 @@ public class Account  extends ActionBarActivity {
 
     }
 
+public String newImage="";
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -103,7 +156,8 @@ public class Account  extends ActionBarActivity {
         if(requestCode==RESULT_LOAD_IMG&&resultCode==RESULT_OK&&data!=null)
         {
             Uri selectedImage=data.getData();
-            profileimg.setImageURI(selectedImage);
+            profile_img.setImageURI(selectedImage);
+            newImage=data.getData().toString();
 
         }
     }

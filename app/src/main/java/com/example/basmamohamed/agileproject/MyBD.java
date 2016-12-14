@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static com.example.basmamohamed.agileproject.R.id.engscore;
 import static com.example.basmamohamed.agileproject.R.id.username;
 
 /**
@@ -186,6 +187,17 @@ public class MyBD  extends SQLiteOpenHelper {
         }
 
         return urI;
+
+
+    }
+
+    public void editImage(MyBD db , String userN, String imageUri)
+    {
+
+        SQLiteDatabase sdb = db.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(TableUserImage,imageUri);
+        sdb.update(TableUsers,cv,TableUserName+" = '" +userN+"'",null);
 
 
     }

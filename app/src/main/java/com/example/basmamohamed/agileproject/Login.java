@@ -47,14 +47,13 @@ public class Login extends Activity {
                 if(validateUser){
                     Toast.makeText(Login.this,
                             "Found user", Toast.LENGTH_LONG).show();
-                    //      finish();
+
+
                     Bundle b = new Bundle();
                     b.putString("User", txt1.getText().toString());
-
                     Intent intent = new Intent(Login.this, Account.class);
                     intent.putExtras(b);
                     startActivity(intent);
-//                    startActivity(intent);
                 }
                 else{
 
@@ -69,6 +68,7 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, signup.class);
+
                 startActivity(intent);
 
             }

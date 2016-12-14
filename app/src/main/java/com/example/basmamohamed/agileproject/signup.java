@@ -122,11 +122,7 @@ public class signup extends Activity {
                             Toast.makeText(signup.this,
                                     txt1.getText().toString()+"is inserted", Toast.LENGTH_LONG).show();
 
-                      /*  Intent intent = new Intent(signup.this, Login.class);
 
-                    startActivity(intent);
-                    finish();
-*/
                             Bundle b = new Bundle();
                             b.putString("User", txt1.getText().toString());
 
