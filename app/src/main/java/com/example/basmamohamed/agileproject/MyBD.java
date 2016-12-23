@@ -5,8 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Movie;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import static android.R.attr.description;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static com.example.basmamohamed.agileproject.R.id.engscore;
 import static com.example.basmamohamed.agileproject.R.id.username;
@@ -18,7 +22,7 @@ import static com.example.basmamohamed.agileproject.R.id.username;
 public class MyBD  extends SQLiteOpenHelper {
 
     public static String DB_NAME = "GamesDB";
-    public static int version = 1;
+    public static int version = 2;
 
     public static String TableUsers = "Users";
     public static String TableUserID = "ID";
@@ -42,8 +46,27 @@ public class MyBD  extends SQLiteOpenHelper {
 
 
 
+    private static final String TABLE_IMAGES = "images";
+    private static final String COLUMN_ID = "ID";
+    private static final String COLUMN_IMAGE = "imageResource";
+    private static final String COLUMN_ANSWER1 = "ANSWER1";
+    private static final String COLUMN_ANSWER2 = "ANSWER2";
+    private static final String COLUMN_ANSWER3 = "ANSWER3";
+    private static final String COLUMN_ANSWER4 = "ANSWER4";
+    private static final String COLUMN_RIGHTANSWER = "rightanswer";
+
+    String createTableEnglishGame = "CREATE TABLE IF NOT EXISTS "+TABLE_IMAGES+" ( "+COLUMN_ID+" INTEGER primary key AUTOINCREMENT, "
+            +COLUMN_IMAGE+" INTEGER , "
+            +COLUMN_ANSWER1+" TEXT ,"
+            +COLUMN_ANSWER2+" TEXT ,"
+            +COLUMN_ANSWER3+" TEXT ,"
+            +COLUMN_ANSWER4+" TEXT ,"
+            +COLUMN_RIGHTANSWER+" TEXT);";
+
+
+
     //KEY_IMAGE + " BLOB);"
-    String createTableleaderboard = "CREATE TABLE "+tableleaderboard+" ( "+tablerankname+" TEXT primary key , "
+    String createTableleaderboard = "CREATE TABLE IF NOT EXISTS "+tableleaderboard+" ( "+tablerankname+" TEXT primary key , "
             +tablemathscore+" INTEGER , "
             +tableenglishscore+" INTEGER ,"
             +tabletotalscore+" INTEGER);";
@@ -72,6 +95,7 @@ public class MyBD  extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(createTableUser);
         db.execSQL(createTableleaderboard);
+        db.execSQL(createTableEnglishGame);
 
 
     }
@@ -246,6 +270,19 @@ public class MyBD  extends SQLiteOpenHelper {
 
 
 
+    public Cursor getEnglishData(MyBD db,int rand)
+    {
+        SQLiteDatabase sdb = db.getReadableDatabase();
+
+        Cursor cr = sdb.rawQuery("select * from '"+TABLE_IMAGES +" where "+COLUMN_ID + " = '" + rand+"'", null);
+
+        return cr;
+
+
+    }
+
+
+
 
     public Cursor getAllPlayersMyBD( MyBD db)
     {
@@ -296,5 +333,123 @@ public class MyBD  extends SQLiteOpenHelper {
 
     }
 
+
+    public void createRow (){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_IMAGE, R.drawable.apple);
+        values.put(COLUMN_ANSWER1, "tree");
+        values.put(COLUMN_ANSWER2, "cat");
+        values.put(COLUMN_ANSWER3, "pen");
+        values.put(COLUMN_ANSWER4, "apple");
+        values.put(COLUMN_RIGHTANSWER, "apple");
+        db.insert(TABLE_IMAGES, null, values);
+
+        ContentValues values2 = new ContentValues();
+        values2.put(COLUMN_IMAGE, R.drawable.cat);
+        values2.put(COLUMN_ANSWER1, "tree");
+        values2.put(COLUMN_ANSWER2, "cat");
+        values2.put(COLUMN_ANSWER3, "pen");
+        values2.put(COLUMN_ANSWER4, "apple");
+        values2.put(COLUMN_RIGHTANSWER, "cat");
+        db.insert(TABLE_IMAGES, null, values2);
+
+
+        ContentValues values3 = new ContentValues();
+        values3.put(COLUMN_IMAGE, R.drawable.pen);
+        values3.put(COLUMN_ANSWER1, "tree");
+        values3.put(COLUMN_ANSWER2, "cat");
+        values3.put(COLUMN_ANSWER3, "pen");
+        values3.put(COLUMN_ANSWER4, "apple");
+        values3.put(COLUMN_RIGHTANSWER, "pen");
+        db.insert(TABLE_IMAGES, null, values3);
+
+
+        ContentValues values4 = new ContentValues();
+        values4.put(COLUMN_IMAGE, R.drawable.table);
+        values4.put(COLUMN_ANSWER1, "tree");
+        values4.put(COLUMN_ANSWER2, "cat");
+        values4.put(COLUMN_ANSWER3, "pen");
+        values4.put(COLUMN_ANSWER4, "table");
+        values4.put(COLUMN_RIGHTANSWER, "table");
+        db.insert(TABLE_IMAGES, null, values4);
+
+
+        ContentValues values5 = new ContentValues();
+        values5.put(COLUMN_IMAGE, R.drawable.tree);
+        values5.put(COLUMN_ANSWER1, "tree");
+        values5.put(COLUMN_ANSWER2, "cat");
+        values5.put(COLUMN_ANSWER3, "pen");
+        values5.put(COLUMN_ANSWER4, "apple");
+        values5.put(COLUMN_RIGHTANSWER, "tree");
+        db.insert(TABLE_IMAGES, null, values5);
+
+        db.close();
+    }
+
+
+    public ArrayList<EnglishQuestion> getAllQuestions() {
+        String query = "SELECT * FROM " + TABLE_IMAGES;
+        ArrayList<EnglishQuestion> movies = new ArrayList<EnglishQuestion>();
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor c = database.rawQuery(query, null);
+        if (c != null) {
+            while (c.moveToNext()) {
+                int mId = c.getInt(c.getColumnIndex(COLUMN_ID));
+                int imgR = c.getInt(c.getColumnIndex(COLUMN_IMAGE));
+                String choice1 = c.getString(c.getColumnIndex(COLUMN_ANSWER1));
+                String choice2 = c.getString(c.getColumnIndex(COLUMN_ANSWER2));
+                String choice3 = c.getString(c.getColumnIndex(COLUMN_ANSWER3));
+                String choice4 = c.getString(c.getColumnIndex(COLUMN_ANSWER4));
+                String rightA = c.getString(c.getColumnIndex(COLUMN_ANSWER1));
+
+                EnglishQuestion eng = new EnglishQuestion(mId, imgR, choice1, choice2, choice3, choice4,rightA);
+
+                movies.add(eng);
+            }
+        }
+        return movies;
+    }
+
+    public EnglishQuestion getSingleQuestion(int idR) {
+        String query = "SELECT * FROM " + TABLE_IMAGES+" where "+COLUMN_ID + " = " + idR;
+        SQLiteDatabase database = getReadableDatabase();
+        EnglishQuestion eng=null;
+        Cursor c = database.rawQuery(query, null);
+        if (c != null) {
+            while (c.moveToNext())
+            {
+                int mId = c.getInt(c.getColumnIndex(COLUMN_ID));
+            int imgR = c.getInt(c.getColumnIndex(COLUMN_IMAGE));
+            String choice1 = c.getString(c.getColumnIndex(COLUMN_ANSWER1));
+            String choice2 = c.getString(c.getColumnIndex(COLUMN_ANSWER2));
+            String choice3 = c.getString(c.getColumnIndex(COLUMN_ANSWER3));
+            String choice4 = c.getString(c.getColumnIndex(COLUMN_ANSWER4));
+            String rightA = c.getString(c.getColumnIndex(COLUMN_ANSWER1));
+
+            eng = new EnglishQuestion(mId, imgR, choice1, choice2, choice3, choice4, rightA);
+        }
+
+
+        }
+        return eng;
+    }
+
+
+
+    public void deleteteEnglishTable()
+    {
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_IMAGES);
+    }
+
+
+    public void createEnglishTable()
+    {
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(createTableEnglishGame);
+    }
 
 }

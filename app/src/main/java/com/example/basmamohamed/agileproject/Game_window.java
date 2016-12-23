@@ -38,6 +38,16 @@ public class Game_window  extends Activity {
             }
         });
 
+        btn2=(Button)findViewById(R.id.englishbtn);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Game_window.this, English_Game.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 

@@ -38,7 +38,7 @@ public class MathScore extends Activity {
         db2.insertmathscore(db2,d,s,0);
 
 
-        btn1=(Button) findViewById(R.id.button3);
+        btn1=(Button) findViewById(R.id.choice1);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override

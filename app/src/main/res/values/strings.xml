@@ -8,4 +8,5 @@
     <string name="changepass">Change password</string>
     <string name="logout">Log out</string>
     <string name="appbar_scrolling_view_behavior"></string>
+    <string name="title_activity_english__game">English_Game</string>
 </resources>
