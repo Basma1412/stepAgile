@@ -452,4 +452,16 @@ public class MyBD  extends SQLiteOpenHelper {
         db.execSQL(createTableEnglishGame);
     }
 
+
+    public void insertEnglishScore(MyBD db , String userN, int eng_Score)
+    {
+
+        SQLiteDatabase sdb = db.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(tableenglishscore,eng_Score);
+        sdb.update(TableUsers,cv,TableUserName+" = '" +userN+"'",null);
+
+
+    }
+
 }
