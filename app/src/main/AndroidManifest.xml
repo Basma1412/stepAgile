@@ -59,6 +59,12 @@
             android:name=".MathScore"
             android:label="@string/app_name"></activity>
 
+
+        <activity
+            android:name=".EnglishScore"
+            android:label="@string/app_name"></activity>
+
+
         <activity
             android:name=".Game_window"
             android:label="@string/app_name"></activity>

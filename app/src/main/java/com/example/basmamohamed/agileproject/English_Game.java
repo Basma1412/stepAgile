@@ -1,5 +1,6 @@
 package com.example.basmamohamed.agileproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,14 +17,14 @@ public class English_Game extends AppCompatActivity {
     Button c2;
     Button c3;
     Button c4;
-    Button submit;
+    Button sub;
     MyBD bd;
     ImageView pic;
     String rightAns;
     String correct = "Great,Correct Answer :D";
     String wrong = "Try again :( ";
     boolean created = false;
-
+    int eScore = 0;
     int turn = 1;
 
     @Override
@@ -35,11 +36,10 @@ public class English_Game extends AppCompatActivity {
         c2 = (Button) findViewById(R.id.choice2);
         c3 = (Button) findViewById(R.id.choice3);
         c4 = (Button) findViewById(R.id.choice4);
-        submit = (Button) findViewById(R.id.next);
+        sub = (Button) findViewById(R.id.Skip);
         bd = new MyBD(English_Game.this);
 
 
-//            created = true;
         bd.deleteteEnglishTable();
         bd.createEnglishTable();
         bd.createRow();
@@ -47,22 +47,39 @@ public class English_Game extends AppCompatActivity {
         play();
 
 
+
     }
 
 
+
+
     private void play() {
+
+        sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (turn >= 4) {
+                    finishGame();
+                } else {
+                    turn++;
+                    setGame(turn);
+                }
+            }
+        });
+
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String text = c1.getText().toString();
                 if (text.equalsIgnoreCase(rightAns)) {
-
+                    eScore++;
                     Toast.makeText(English_Game.this, correct, Toast.LENGTH_LONG).show();
                     if (turn >= 4) {
-
-                    }
-                    else {
+                        finishGame();
+                        ;
+                    } else {
                         turn++;
                         setGame(turn);
                     }
@@ -81,13 +98,12 @@ public class English_Game extends AppCompatActivity {
 
                 String text = c2.getText().toString();
                 if (text.equalsIgnoreCase(rightAns)) {
-
+                    eScore++;
 
                     Toast.makeText(English_Game.this, correct, Toast.LENGTH_LONG).show();
                     if (turn >= 4) {
-
-                    }
-                    else {
+                        finishGame();
+                    } else {
                         turn++;
                         setGame(turn);
                     }
@@ -105,13 +121,12 @@ public class English_Game extends AppCompatActivity {
 
                 String text = c3.getText().toString();
                 if (text.equalsIgnoreCase(rightAns)) {
-
+                    eScore++;
 
                     Toast.makeText(English_Game.this, correct, Toast.LENGTH_LONG).show();
                     if (turn >= 4) {
-
-                    }
-                    else {
+                        finishGame();
+                    } else {
                         turn++;
                         setGame(turn);
                     }
@@ -129,23 +144,23 @@ public class English_Game extends AppCompatActivity {
 
                 String text = c4.getText().toString();
                 if (text.equalsIgnoreCase(rightAns)) {
-
+                    eScore++;
 
                     Toast.makeText(English_Game.this, correct, Toast.LENGTH_LONG).show();
                     if (turn >= 4) {
-
-                    }
-                    else {
+                        finishGame();
+                    } else {
                         turn++;
                         setGame(turn);
                     }
                 } else {
 
 
-                    Toast.makeText(English_Game.this, wrong  + text, Toast.LENGTH_LONG).show();
+                    Toast.makeText(English_Game.this, wrong + text, Toast.LENGTH_LONG).show();
                 }
             }
         });
+
 
 
 
@@ -156,6 +171,14 @@ public class English_Game extends AppCompatActivity {
     String choiceB;
     String choiceC;
     String choiceD;
+
+    public void finishGame() {
+        Intent intent = new Intent(English_Game.this, EnglishScore.class);
+        Bundle b = new Bundle();
+        b.putInt("key", eScore);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
 
     public void setGame(int turn) {
         EnglishQuestion e = bd.getSingleQuestion(turn);
@@ -173,6 +196,8 @@ public class English_Game extends AppCompatActivity {
         c3.setText(choiceC);
         c4.setText(choiceD);
         pic.setImageResource(e.getImageRes());
+
+
 
 
     }

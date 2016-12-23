@@ -23,7 +23,7 @@ public class MathScore extends Activity {
 
         setContentView(R.layout.mathscore);
         // g=new Math_Game();
-        txt=(TextView) findViewById(R.id.score_txt);
+        txt=(TextView) findViewById(R.id.eng_score_txt);
         //txt.setText(g.MathScore);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
