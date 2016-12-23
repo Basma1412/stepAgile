@@ -172,6 +172,20 @@ public class MyBD  extends SQLiteOpenHelper {
     }
 
 
+    public void updatepassword(MyBD db,String name, String password)
+    {
+
+        SQLiteDatabase sdb = db.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(TableUserPassword,password);
+        cv.put(TableUserName,name);
+
+        sdb.update(TableUsers,cv,TableUserName+" = '" +name+"'",null);
+        Toast.makeText(context1, " your password is inserted",Toast.LENGTH_SHORT).show();
+    }
+
 
 
     public String getURI(MyBD db,String username){
@@ -258,5 +272,29 @@ public class MyBD  extends SQLiteOpenHelper {
 
 
     }
+
+    public Cursor getTotalscore( MyBD db ,String name)
+    {
+        SQLiteDatabase sdb = db.getReadableDatabase();
+
+        Cursor cr = sdb.rawQuery("select "+tabletotalscore+" from '"+TableUsers+ "' where "+TableUserName + " = '" + name+"'",null);
+
+        return cr;
+
+
+    }
+
+
+    public Cursor Age_Email( MyBD db ,String name)
+    {
+        SQLiteDatabase sdb = db.getReadableDatabase();
+
+        Cursor cr = sdb.rawQuery("select "+TableUserEmail+","+TableUserAge+" from '"+TableUsers+ "' where "+TableUserName + " = '" + name+"'",null);
+
+        return cr;
+
+
+    }
+
 
 }

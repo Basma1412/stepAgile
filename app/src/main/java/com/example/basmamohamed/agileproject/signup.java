@@ -2,6 +2,7 @@ package com.example.basmamohamed.agileproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -122,7 +123,10 @@ public class signup extends Activity {
                             Toast.makeText(signup.this,
                                     txt1.getText().toString()+"is inserted", Toast.LENGTH_LONG).show();
 
-
+                            SharedPreferences preferences = getSharedPreferences("userInfo",getApplicationContext().MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("username",txt1.getText().toString());
+                            editor.commit();
                             Bundle b = new Bundle();
                             b.putString("User", txt1.getText().toString());
 

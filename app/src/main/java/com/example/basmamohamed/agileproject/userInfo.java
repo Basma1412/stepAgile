@@ -6,17 +6,21 @@ package com.example.basmamohamed.agileproject;
 
 public class userInfo {
     private String username;
-    private int mathscore;
-    private int engscore;
+    private int mathscore=0;
+    private int engscore=0;
     private int totalscore;
+    private int age;
     private int rank;
-
-    public userInfo(String username, int mathscore ,int engscore,int totalscore ,int rank ) {
+    private String userimage;
+    private String email;
+    public userInfo(String username, int mathscore ,int engscore,int totalscore ,int rank,int age,String email ) {
         this.mathscore=mathscore;
         this.username=username;
         this.engscore=engscore;
         this.rank=rank;
         this.totalscore=totalscore;
+        this.age=age;
+        this.email=email;
     }
 
     public userInfo() {
@@ -38,7 +42,8 @@ public class userInfo {
         this.mathscore = math;
     }
 
-
+    public void setuserimage(String userimage){this.userimage=userimage;}
+    public String getuserimage(){return this.userimage;}
 
     public int getengscore() {
         return engscore;
@@ -48,8 +53,23 @@ public class userInfo {
         this.engscore = eng;
     }
 
+    public int getage() {
+        return age;
+    }
+    public void setage(int age){
+        this.age=age;
 
+    }
 
+    public void setEmail(String email){
+
+        this.email=email;
+    }
+
+    public String getEmail(){
+
+        return email;
+    }
     public int gettotalscore() {
         return totalscore;
     }
@@ -67,6 +87,5 @@ public class userInfo {
     public void setrank(int rank) {
         this.rank = rank;
     }
-
 
 }

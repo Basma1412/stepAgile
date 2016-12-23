@@ -1,6 +1,7 @@
 package com.example.basmamohamed.agileproject;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by Basma Mohamed on 12/12/2016.
@@ -49,7 +53,6 @@ public class CustomListAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -62,7 +65,7 @@ public class CustomListAdapter extends BaseAdapter {
         TextView engText = (TextView) convertView.findViewById(R.id.engscore);
         TextView totalText = (TextView) convertView.findViewById(R.id.totalscore);
         TextView rankText = (TextView) convertView.findViewById(R.id.rank);
-
+        ImageView userimage=(ImageView) convertView.findViewById(R.id.imagelogo);
         final userInfo t = getItem(position);
 
         nameText.setText(t.getUsername());
@@ -70,7 +73,19 @@ public class CustomListAdapter extends BaseAdapter {
         engText.setText("The english game score : "+t.getengscore());
         totalText.setText("The total score : "+t.gettotalscore());
         rankText.setText("The rank : "+t.getrank());
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.imagelogo);
+
+
+        Uri uri;
+        uri = Uri.parse(t.getuserimage());
+
+        File f = new File(uri.getPath());
+
+        //Picasso.with(this).load(f).noPlaceholder().centerCrop().fit().into(profile_img);
+        Picasso.with(convertView.getContext())
+                .load(uri)
+                .fit()
+                .skipMemoryCache()
+                .into(userimage);
 
         return convertView;
     }

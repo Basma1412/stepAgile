@@ -4,7 +4,12 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -49,7 +54,10 @@ public class Account  extends ActionBarActivity {
     ImageView profile_img;
     Button UpdateImg;
     MyBD bd;
-
+    private TextView emailtxt;
+    private TextView agetext;
+    SharedPreferences myprefs;
+    String s3;
 
 
 
@@ -71,7 +79,6 @@ public class Account  extends ActionBarActivity {
         Bundle bundle = intent.getExtras();
         final String userName = bundle.getString("User");
         txt.setText("Welcome "+userName);
-
         bd=new MyBD(this);
         String urI=bd.getURI(bd,userName);
         Uri uri;
@@ -100,6 +107,14 @@ public class Account  extends ActionBarActivity {
                     .centerInside()
                     .into(profile_img);
 
+            myprefs= getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            s3= myprefs.getString("username", null);
+            ratingbar1=(RatingBar)findViewById(R.id.ratingBar1);
+            LayerDrawable stars = (LayerDrawable) ratingbar1.getProgressDrawable();
+
+
+            stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+            getEmail_Age_Image();
         }
 
 
@@ -148,7 +163,7 @@ public class Account  extends ActionBarActivity {
     }
 
 public String newImage="";
-
+    String imageUrl;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -158,6 +173,10 @@ public String newImage="";
             Uri selectedImage=data.getData();
             profile_img.setImageURI(selectedImage);
             newImage=data.getData().toString();
+            imageUrl=data.getData().toString();
+            SharedPreferences myprefs= getSharedPreferences("userInfo", MODE_WORLD_READABLE);
+            String s3= myprefs.getString("username", null);
+            bd.editImage(bd,s3,imageUrl);
 
         }
     }
@@ -200,19 +219,107 @@ public String newImage="";
     }
 
 
- /*
-    public void onClick(View view) {
-        switch(view.getId())
+    public void countratingbar(){
+
+        Cursor cr = bd.getTotalscore(bd, s3);
+
+        if (cr.getCount() > 0)
         {
+            cr.moveToFirst();
+            do{
+                totalscore = cr.getInt(cr.getColumnIndex(MyBD.tabletotalscore));
 
-            case R.id.profileImg:
-                Intent galleryIntent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent,RESULT_LOAD_IMG);
-                break;
+            }while (cr.moveToNext());
 
+            cr.close();
+            bd.close();
+        }
+
+
+
+
+
+        if(totalscore<=5){
+            ratingbar1.setRating((float)0.5);
 
         }
+        else if(totalscore<=10)
+
+        {
+            ratingbar1.setRating((float)1);
+
+        }
+
+        else if(totalscore<=15){
+
+            ratingbar1.setRating((float)1.5);
+        }
+
+        else if(totalscore<=20){
+
+            ratingbar1.setRating((float)2);
+        }
+
+    }
+    public void getEmail_Age_Image(){
+        txt=(TextView) findViewById(R.id.welcomeuser);
+        emailtxt=(TextView)findViewById(R.id.emailInfo);
+        agetext=(TextView)findViewById(R.id.ageInfo);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+
+
+        SharedPreferences preferences = getSharedPreferences("user",getApplicationContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        //String s = bundle.getString("User");
+        //String e=bundle.getString("Email");
+        // int age=bundle.getInt("Age");
+        // countratingbar();
+        txt.setText("Welcome " + s3);
+        editor.putString("Username", s3);
+        //editor.commit();
+        bd=new MyBD(Account.this);
+
+        String urI=bd.getURI(bd,s3);
+//usInfo.setusername(s3);
+        //usInfo.setuserimage(urI);
+        Uri uri;
+        uri = Uri.parse(urI);
+
+        File f = new File(uri.getPath());
+
+        Picasso.with(this)
+                .load(uri)
+                .fit()
+                .skipMemoryCache()
+                .into(profile_img);
+        MyBD db2 = new MyBD(Account.this);
+        Cursor cr = db2.Age_Email(db2,s3);
+
+
+        if (cr.getCount() > 0)
+        {
+            cr.moveToFirst();
+            do{
+
+                int Age=cr.getInt(cr.getColumnIndex(MyBD.TableUserAge));
+                //usInfo.setage(Age);
+                String Email=cr.getString(cr.getColumnIndex(MyBD.TableUserEmail));
+                //usInfo.setEmail(Email);
+                emailtxt.setText("Email: "+ Email);
+                agetext.setText("Age: "+Age);
+                editor.putString("Email",Email);
+                editor.putInt("Age",Age);
+                editor.commit();
+            }while (cr.moveToNext());
+
+            cr.close();
+            db2.close();
+        }
+
     }
 
-*/
+
 }
