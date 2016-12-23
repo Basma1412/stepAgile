@@ -24,6 +24,7 @@ public class English_Game extends AppCompatActivity {
     String wrong = "Try again :( ";
     boolean created = false;
 
+    int turn = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +41,14 @@ public class English_Game extends AppCompatActivity {
 
 //            created = true;
         bd.deleteteEnglishTable();
-       bd.createEnglishTable();
+        bd.createEnglishTable();
         bd.createRow();
-       setGame();
-
-
-//        play();
+        setGame(turn);
+        play();
 
 
     }
+
 
     private void play() {
         c1.setOnClickListener(new View.OnClickListener() {
@@ -56,9 +56,16 @@ public class English_Game extends AppCompatActivity {
             public void onClick(View v) {
 
                 String text = c1.getText().toString();
-                if (text == rightAns) {
+                if (text.equalsIgnoreCase(rightAns)) {
 
                     Toast.makeText(English_Game.this, correct, Toast.LENGTH_LONG).show();
+                    if (turn >= 4) {
+
+                    }
+                    else {
+                        turn++;
+                        setGame(turn);
+                    }
                 } else {
 
 
@@ -73,10 +80,17 @@ public class English_Game extends AppCompatActivity {
             public void onClick(View v) {
 
                 String text = c2.getText().toString();
-                if (text == rightAns) {
+                if (text.equalsIgnoreCase(rightAns)) {
 
 
                     Toast.makeText(English_Game.this, correct, Toast.LENGTH_LONG).show();
+                    if (turn >= 4) {
+
+                    }
+                    else {
+                        turn++;
+                        setGame(turn);
+                    }
                 } else {
 
 
@@ -90,10 +104,17 @@ public class English_Game extends AppCompatActivity {
             public void onClick(View v) {
 
                 String text = c3.getText().toString();
-                if (text == rightAns) {
+                if (text.equalsIgnoreCase(rightAns)) {
 
 
                     Toast.makeText(English_Game.this, correct, Toast.LENGTH_LONG).show();
+                    if (turn >= 4) {
+
+                    }
+                    else {
+                        turn++;
+                        setGame(turn);
+                    }
                 } else {
 
 
@@ -107,17 +128,26 @@ public class English_Game extends AppCompatActivity {
             public void onClick(View v) {
 
                 String text = c4.getText().toString();
-                if (text == rightAns) {
+                if (text.equalsIgnoreCase(rightAns)) {
 
 
                     Toast.makeText(English_Game.this, correct, Toast.LENGTH_LONG).show();
+                    if (turn >= 4) {
+
+                    }
+                    else {
+                        turn++;
+                        setGame(turn);
+                    }
                 } else {
 
 
-                    Toast.makeText(English_Game.this, wrong + "" + rightAns + "," + text, Toast.LENGTH_LONG).show();
+                    Toast.makeText(English_Game.this, wrong  + text, Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+
 
 
     }
@@ -127,8 +157,8 @@ public class English_Game extends AppCompatActivity {
     String choiceC;
     String choiceD;
 
-    public void setGame() {
-        EnglishQuestion e = bd.getSingleQuestion(3);
+    public void setGame(int turn) {
+        EnglishQuestion e = bd.getSingleQuestion(turn);
 
         choiceA = e.choice1;
         choiceB = e.choice2;
@@ -136,12 +166,13 @@ public class English_Game extends AppCompatActivity {
         choiceD = e.choice4;
 
 
+        rightAns = e.getRight();
+
         c1.setText(choiceA);
         c2.setText(choiceB);
         c3.setText(choiceC);
         c4.setText(choiceD);
         pic.setImageResource(e.getImageRes());
-
 
 
     }

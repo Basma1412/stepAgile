@@ -401,7 +401,7 @@ public class MyBD  extends SQLiteOpenHelper {
                 String choice2 = c.getString(c.getColumnIndex(COLUMN_ANSWER2));
                 String choice3 = c.getString(c.getColumnIndex(COLUMN_ANSWER3));
                 String choice4 = c.getString(c.getColumnIndex(COLUMN_ANSWER4));
-                String rightA = c.getString(c.getColumnIndex(COLUMN_ANSWER1));
+                String rightA = c.getString(c.getColumnIndex(COLUMN_RIGHTANSWER));
 
                 EnglishQuestion eng = new EnglishQuestion(mId, imgR, choice1, choice2, choice3, choice4,rightA);
 
@@ -425,7 +425,7 @@ public class MyBD  extends SQLiteOpenHelper {
             String choice2 = c.getString(c.getColumnIndex(COLUMN_ANSWER2));
             String choice3 = c.getString(c.getColumnIndex(COLUMN_ANSWER3));
             String choice4 = c.getString(c.getColumnIndex(COLUMN_ANSWER4));
-            String rightA = c.getString(c.getColumnIndex(COLUMN_ANSWER1));
+            String rightA = c.getString(c.getColumnIndex(COLUMN_RIGHTANSWER));
 
             eng = new EnglishQuestion(mId, imgR, choice1, choice2, choice3, choice4, rightA);
         }
