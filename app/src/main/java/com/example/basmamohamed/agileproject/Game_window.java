@@ -16,7 +16,7 @@ public class Game_window  extends Activity {
     private Button btn2;
 
     private Button btn3;
-
+    String name="";
 
 
     @Override
@@ -25,7 +25,9 @@ public class Game_window  extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.game_window);
-
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+         name = bundle.getString("name");
         //btn2=(Button) findViewById(R.id.englishbutton);
         btn1=(Button) findViewById(R.id.mathbutton1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +46,9 @@ public class Game_window  extends Activity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(Game_window.this, English_Game.class);
+                Bundle b = new Bundle();
+                b.putString("name", name);
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
             }

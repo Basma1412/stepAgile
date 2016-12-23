@@ -26,10 +26,15 @@ public class English_Game extends AppCompatActivity {
     boolean created = false;
     int eScore = 0;
     int turn = 1;
-
+    String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        name = bundle.getString("name");
+
         setContentView(R.layout.english_game);
         pic = (ImageView) findViewById(R.id.picQuestion);
         c1 = (Button) findViewById(R.id.choice1);
@@ -176,6 +181,7 @@ public class English_Game extends AppCompatActivity {
         Intent intent = new Intent(English_Game.this, EnglishScore.class);
         Bundle b = new Bundle();
         b.putInt("key", eScore);
+        b.putString("name", name);
         intent.putExtras(b);
         startActivity(intent);
     }

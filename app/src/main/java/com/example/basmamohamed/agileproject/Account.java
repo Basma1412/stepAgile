@@ -145,6 +145,9 @@ public class Account  extends ActionBarActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(Account.this, Game_window.class);
+                Bundle b = new Bundle();
+                b.putString("name", userName);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });

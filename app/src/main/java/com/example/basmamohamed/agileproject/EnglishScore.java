@@ -7,14 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Created by Basma Mohamed on 12/12/2016.
- */
+
 
 public class EnglishScore extends Activity {
     private Button btn1;
     private TextView txt;
-
+    String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -25,7 +23,9 @@ public class EnglishScore extends Activity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         int s = bundle.getInt("key");
-        txt.setText("" + s);
+        name = bundle.getString("name");
+        String text=""+s;
+        txt.setText(text);
 
 
 
